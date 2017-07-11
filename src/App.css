@@ -12,9 +12,9 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  background: #45B649;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #45B649, #a8e063);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #45B649, #a8e063); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #45b649;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #45b649, #a8e063);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #45b649, #a8e063); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   text-align: center;
 }
 .list-books-title h1 {
@@ -149,7 +149,7 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #45B649;
+  background: #45b649;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
