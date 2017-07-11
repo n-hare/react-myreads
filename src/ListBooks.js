@@ -6,7 +6,16 @@ import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class ListBooks extends React.Component {
+    state= {
+        books: []
+    }
 
+   componentDidMount() {
+        BooksAPI.getAll()
+            .then((books) => {
+                this.setState({ books })
+            })
+    }
     render() {
         return (
             <div className="list-books">
