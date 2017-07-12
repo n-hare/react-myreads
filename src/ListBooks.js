@@ -13,11 +13,18 @@ class ListBooks extends React.Component {
    componentDidMount() {
         BooksAPI.getAll()
             .then((books) => {
+                console.log(books)
                 this.setState({ books })
             })
+
     }
 
     render() {
+        const currentlyReading =  this.state.books.filter((book)=> (book.shelf === 'currentlyReading')) || []
+        const wantToRead = this.state.books.filter((book)=> (book.shelf === 'wantToRead')) || []
+        const read = this.state.books.filter((book)=> (book.shelf === 'read')) || []
+
+        console.log(currentlyReading,wantToRead, read)
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -25,9 +32,9 @@ class ListBooks extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf shelfTitle='Currently Reading' />
-                        <BookShelf shelfTitle='Want to Read' />
-                        <BookShelf shelfTitle='Read' />
+                        <BookShelf shelfTitle='Currently Reading' shelfBooks={ currentlyReading } />
+                        <BookShelf shelfTitle='Want to Read' shelfBooks={ wantToRead } />
+                        <BookShelf shelfTitle='Read' shelfBooks={ read } />
                     </div>
                 </div>
                 <div className="open-search">
