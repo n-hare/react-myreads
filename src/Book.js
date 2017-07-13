@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+
+
 class Book extends React.Component {
     render() {
         const { bookDetails } = this.props
         return (
             <div className="book">
               <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookDetails.imageLinks.smallThumbnail})` }}></div>
+                <div className="book-cover" style={ bookDetails.imageLinks.smallThumbnail ? { width: 128, height: 193, backgroundImage: `url(${bookDetails.imageLinks.smallThumbnail})` }: {} }></div>
                 <div className="book-shelf-changer">
                   <select value={bookDetails.shelf} onChange={ (evt) => this.props.onShelfChange(bookDetails, evt)} >
                         <option value="none" disabled>Move to...</option>
@@ -19,7 +21,7 @@ class Book extends React.Component {
                 </div>
               </div>
               <div className="book-title">{ bookDetails.title }</div>
-              <div className="book-authors">{ bookDetails.authors.join(', ') } </div>
+              <div className="book-authors">{ bookDetails.authors ? bookDetails.authors.join(', ') : ''} </div>
             </div>
         )
     }
