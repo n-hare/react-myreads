@@ -9,7 +9,7 @@ import SearchPage from './SearchPage'
 
 class BooksApp extends React.Component {
 
-  state= {
+    state= {
         books: []
     }
 
@@ -18,7 +18,9 @@ class BooksApp extends React.Component {
         BooksAPI.update(updateBook, newShelf)
             .then(() => {
                 const books = [...this.state.books]
-                books[books.indexOf(updateBook)].shelf = newShelf
+                if (books[books.indexOf(updateBook)]) {
+                    books[books.indexOf(updateBook)].shelf = newShelf
+                }
                 this.setState({ books })
 
             })
@@ -29,17 +31,21 @@ class BooksApp extends React.Component {
       this.setState({ books })
     }
 
-  render() {
+    render() {
     return (
         <div className="app">
-            <Route exact path="/" render={ ()=>(
+            <Route exact path="/" render={ () => (
                 <ListBooks
                     books={this.state.books}
                     onShelfChange={ this._handleShelfChange }
                     onUpdateBooks={this._updateBooks}
                 />
             )} />
-            <Route path="/search" component={SearchPage} />
+            <Route path="/search" render={ () =>(
+                <SearchPage
+                    onShelfChange={ this._handleShelfChange }
+                />
+                )} />
         </div>
     )
   }

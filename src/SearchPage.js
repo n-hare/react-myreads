@@ -23,17 +23,15 @@ class SearchPage extends React.Component {
     }
     _queryAPI = (query) =>{
         BooksAPI.search(query, 20).then( (books) => {
-            console.log(books)
             this.setState({ books })
         })
     }
 
     render() {
         const userQuery = this.state.query || ''
-        console.log(userQuery.length)
         return (
             <div className="search-books">
-              <div className="search-books-bar">
+                <div className="search-books-bar">
                     <Link className="close-search" to="/">Close</Link>
                     <div className="search-books-input-wrapper">
                         <input type="text"
@@ -41,12 +39,12 @@ class SearchPage extends React.Component {
                             onChange={ ( evt ) => this._updateQuery(evt.target.value) }
                         />
                     </div>
-              </div>
-              <div className="search-books-results">
+                </div>
+                <div className="search-books-results">
                     <ol className="books-grid">
-                        {userQuery.length && this.state.books.length ? this.state.books.map( (book)=> (<li key={book.id}> <Book bookDetails={book} /> </li>)) : '' }
+                        {userQuery.length && this.state.books.length ? this.state.books.map( (book, i)=> (<li key={i}> <Book bookDetails={book} onShelfChange={ this.props.onShelfChange } /> </li>)) : '' }
                     </ol>
-              </div>
+                </div>
             </div>
         )
     }
