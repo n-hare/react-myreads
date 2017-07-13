@@ -10,11 +10,27 @@ class ListBooks extends React.Component {
         books: []
     }
 
+    _handleShelfChange = (updateBook, evt) => {
+        const newShelf = evt.target.value
+        BooksAPI.update(updateBook, newShelf)
+            .then(() => {
+                const books = [...this.state.books]
+                books[books.indexOf(updateBook)].shelf = newShelf
+                this.setState({ books })
+
+            })
+
+
+
+
+
+    }
+
    componentDidMount() {
         BooksAPI.getAll()
             .then((books) => {
-                console.log(books)
                 this.setState({ books })
+                console.log(this.state.books)
             })
 
     }
@@ -24,7 +40,6 @@ class ListBooks extends React.Component {
         const wantToRead = this.state.books.filter((book)=> (book.shelf === 'wantToRead')) || []
         const read = this.state.books.filter((book)=> (book.shelf === 'read')) || []
 
-        console.log(currentlyReading,wantToRead, read)
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -32,9 +47,9 @@ class ListBooks extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf shelfTitle='Currently Reading' shelfBooks={ currentlyReading } />
-                        <BookShelf shelfTitle='Want to Read' shelfBooks={ wantToRead } />
-                        <BookShelf shelfTitle='Read' shelfBooks={ read } />
+                        <BookShelf shelfTitle='Currently Reading' shelfBooks={ currentlyReading } onShelfChange={ this._handleShelfChange } />
+                        <BookShelf shelfTitle='Want to Read' shelfBooks={ wantToRead } onShelfChange={ this._handleShelfChange } />
+                        <BookShelf shelfTitle='Read' shelfBooks={ read } onShelfChange={ this._handleShelfChange } />
                     </div>
                 </div>
                 <div className="open-search">
