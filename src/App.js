@@ -16,19 +16,24 @@ class BooksApp extends React.Component {
     _handleShelfChange = (updateBook, evt) => {
         const newShelf = evt.target.value
         BooksAPI.update(updateBook, newShelf)
-            .then(() => {
-                const books = [...this.state.books]
-                if (books[books.indexOf(updateBook)]) {
-                    books[books.indexOf(updateBook)].shelf = newShelf
-                }
-                this.setState({ books })
-
+            .then( () => {
+                BooksAPI.getAll()
+                    .then((books) => {
+                        this.setState({ books })
+                })
             })
+    }
+
+    componentDidMount() {
+        BooksAPI.getAll()
+            .then((books) => {
+                this.setState({ books })
+        })
 
     }
 
     _updateBooks = (books) => {
-      this.setState({ books })
+        this.setState({ books })
     }
 
     render() {
@@ -38,11 +43,11 @@ class BooksApp extends React.Component {
                 <ListBooks
                     books={this.state.books}
                     onShelfChange={ this._handleShelfChange }
-                    onUpdateBooks={this._updateBooks}
                 />
             )} />
             <Route path="/search" render={ () =>(
                 <SearchPage
+                    listBooks={this.state.books}
                     onShelfChange={ this._handleShelfChange }
                 />
                 )} />

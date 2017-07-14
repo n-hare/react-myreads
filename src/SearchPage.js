@@ -27,6 +27,23 @@ class SearchPage extends React.Component {
         })
     }
 
+    componentDidUpdate(){
+        let bookDetailsUpdate = false
+        let searchBooks = [...this.state.books],
+        {listBooks} = this.props
+        searchBooks.forEach((searchBook)=> {
+            listBooks.forEach((listBook)=> {
+                if (searchBook.title === listBook.title && searchBook.id === listBook.id && searchBook.shelf !== listBook.shelf ){
+                    searchBook.shelf = listBook.shelf
+                    bookDetailsUpdate = true
+                }
+            })
+        })
+        if (bookDetailsUpdate){
+            this.setState({ books: searchBooks})
+        }
+    }
+
     render() {
         const userQuery = this.state.query || ''
         return (
@@ -42,7 +59,7 @@ class SearchPage extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {userQuery.length && this.state.books.length ? this.state.books.map( (book, i)=> (<li key={i}> <Book bookDetails={book} onShelfChange={ this.props.onShelfChange } /> </li>)) : '' }
+                        {userQuery.length && this.state.books.length ? this.state.books.map( (book, i)=> (<li key={i}> <Book bookDetails={book} onShelfChange={ this.props.onShelfChange } /> </li>)) : <p>No Results...</p> }
                     </ol>
                 </div>
             </div>

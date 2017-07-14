@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 
 
 class Book extends React.Component {
+
     render() {
-        const { bookDetails } = this.props
+        const {bookDetails}  = this.props
         return (
             <div className="book">
               <div className="book-top">
