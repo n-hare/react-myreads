@@ -59,7 +59,7 @@ class SearchPage extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {userQuery.length && this.state.books.length ? this.state.books.map( (book, i)=> (<li key={i}> <Book bookDetails={book} onShelfChange={ this.props.onShelfChange } /> </li>)) : <p>No Results...</p> }
+                        {userQuery.length && this.state.books.length ? this.state.books.map( (book, i)=> (<li key={i}> <Book bookDetails={book} onShelfChange={ this.props.onShelfChange } /> </li>)) : '' }
                     </ol>
                 </div>
             </div>

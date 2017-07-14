@@ -7,10 +7,11 @@ class Book extends React.Component {
 
     render() {
         const {bookDetails}  = this.props
+        const img = 'imageLinks' in bookDetails ? bookDetails.imageLinks.smallThumbnail : 'book.png'
         return (
             <div className="book">
               <div className="book-top">
-                <div className="book-cover" style={ bookDetails.imageLinks.smallThumbnail ? { width: 128, height: 193, backgroundImage: `url(${bookDetails.imageLinks.smallThumbnail})` }: {} }></div>
+                <div className="book-cover" style={ { width: 128, height: 193, backgroundImage: `url(${ img })` } }></div>
                 <div className="book-shelf-changer">
                   <select value={bookDetails.shelf} onChange={ (evt) => this.props.onShelfChange(bookDetails, evt)} >
                         <option value="none" disabled>Move to...</option>
