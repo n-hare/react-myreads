@@ -20,9 +20,10 @@ class SearchPage extends React.Component {
         }
     }
     _queryAPI = (query) =>{
-        BooksAPI.search(query, 20).then( (books) => {
-            this.setState({ books })
-        })
+        BooksAPI.search(query, 20)
+            .then( (books) => {
+                this.setState({ books })
+            })
     }
 
     componentDidUpdate(){
