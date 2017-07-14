@@ -1,12 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types'
 
 // Components
 import Book from './Book'
-
-
-
 
 class SearchPage extends React.Component {
     state = {
@@ -52,7 +50,7 @@ class SearchPage extends React.Component {
                     <Link className="close-search" to="/">Close</Link>
                     <div className="search-books-input-wrapper">
                         <input type="text"
-                            placeholder="Search by title or author"
+                            placeholder="Search by title"
                             onChange={ ( evt ) => this._updateQuery(evt.target.value) }
                         />
                     </div>
@@ -65,6 +63,11 @@ class SearchPage extends React.Component {
             </div>
         )
     }
+}
+
+SearchPage.propTypes = {
+    listBooks: PropTypes.array.isRequired,
+    onShelfChange: PropTypes.func.isRequired
 }
 
 export default SearchPage
