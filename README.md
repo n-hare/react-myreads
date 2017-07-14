@@ -1,6 +1,7 @@
 ## Install and Start
 * `npm install`
 * `npm start`
+* Launch http://localhost:3000/
 
 ## Backend Server
 
